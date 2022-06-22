@@ -15,7 +15,7 @@ Konkurencja Droniada 2022
 
 ## TODO
 - [ ] function (drone height) => circle radius (min, max)
-- [ ] ROI circle
+- [x] ROI circle
 - [ ] ROI circle average color
 - [ ] filter out circles with color
 - [ ] calculateGPSPosition - add calculation for circle center-photo center offset
