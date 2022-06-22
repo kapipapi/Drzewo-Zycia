@@ -112,23 +112,19 @@ public:
             std::vector<Point2d> circlesToShootGPS;
 
             // filter out already shooted circles
-            if (!circlesAlreadyShooted.empty()) {
-                for (const auto &new_circle: detectedCirclesGPS) {
-                    bool isSameCircle = false;
+            for (const auto &new_circle: detectedCirclesGPS) {
+                bool isSameCircle = false;
 
-                    for (const auto &shooted_circle: circlesAlreadyShooted) {
-                        auto distance_m = distanceBetweenGPSPositions_m(new_circle, shooted_circle);
-                        if (distance_m <= MaximumDistanceToBeSame_m) {
-                            isSameCircle = true;
-                        }
-                    }
+                for (const auto &shooted_circle: circlesAlreadyShooted) {
+                    auto distance_m = distanceBetweenGPSPositions_m(new_circle, shooted_circle);
+                    std::cout << distance_m << " m" << std::endl;
 
-                    if (!isSameCircle) {
-                        circlesToShootGPS.push_back(new_circle);
+                    if (distance_m <= MaximumDistanceToBeSame_m) {
+                        isSameCircle = true;
                     }
                 }
-            } else {
-                for (const auto &new_circle: detectedCirclesGPS) {
+
+                if (!isSameCircle) {
                     circlesToShootGPS.push_back(new_circle);
                 }
             }
@@ -147,7 +143,7 @@ public:
         }
     }
 
-    std::vector<Point2d> circlesToGPSPositions(const std::vector<Vec3f>& circles) {
+    std::vector<Point2d> circlesToGPSPositions(const std::vector<Vec3f> &circles) {
         std::vector<Point2d> tmpCirclesPositions;
         for (auto c: circles) {
             auto center = Point2d(c[0], c[1]);
@@ -159,9 +155,13 @@ public:
 //    todo: CALCULATE CIRCLE CENTER OFFSET
     Point2d calculateGPSPosition(Point2d imageCenter) {
         auto position = telemetry->position();
+
         auto lat = position.latitude_deg;
         auto lon = position.longitude_deg;
-        auto heading = telemetry->heading().heading_deg;
+
+        auto lat_rad = lat * CV_PI / 180;
+        auto lon_rad = lon * CV_PI / 180;
+        auto heading = telemetry->heading().heading_deg * CV_PI / 180;
 
         auto distance_m = 0; //distance in meters from image center
         auto offset = 0; // offset angle from image
@@ -169,9 +169,13 @@ public:
         auto brng = heading - offset;
         const auto R_m = 6336000; // earth radius in meters
 
-        auto target_lat = asin(sin(lat) * cos(distance_m / R_m) + cos(lat) * sin(distance_m / R_m) * cos(brng));
-        auto target_lon = lon + atan2(cos(distance_m / R_m) - sin(lat) * sin(target_lat),
-                                      sin(brng) * sin(distance_m / R_m) * cos(lat));
+        auto target_lat_rad = asin(
+                sin(lat_rad) * cos(distance_m / R_m) + cos(lat_rad) * sin(distance_m / R_m) * cos(brng));
+        auto target_lon_rad = lon_rad + atan2(sin(brng) * sin(distance_m / R_m) * cos(lat_rad),
+                                              cos(distance_m / R_m) - sin(lat_rad) * sin(target_lat_rad));
+
+        auto target_lat = target_lat_rad * 180 / CV_PI;
+        auto target_lon = target_lon_rad * 180 / CV_PI;
 
         return {target_lat, target_lon};
     }
@@ -183,8 +187,8 @@ public:
         auto lat2 = p2.x;
         auto lon2 = p2.y;
 
-        const auto R = 6371e3; // metres
-        const auto lat1_rad = lat1 * CV_PI / 180; // φ, λ in radians
+        const auto R_m = 6336000; // metres
+        const auto lat1_rad = lat1 * CV_PI / 180;
         const auto lat2_rad = lat2 * CV_PI / 180;
         const auto lat_diff = (lat2 - lat1) * CV_PI / 180;
         const auto lon_diff = (lon2 - lon1) * CV_PI / 180;
@@ -194,7 +198,7 @@ public:
                        sin(lon_diff / 2) * sin(lon_diff / 2);
         const auto c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
-        return R * c; // in metres
+        return R_m * c; // in metres
     }
 
     void subscribe_camera_output(CameraOutputCallback callback) {

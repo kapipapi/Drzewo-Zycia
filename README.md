@@ -11,7 +11,7 @@ Konkurencja Droniada 2022
 `HEADLESS=1 PX4_HOME_LAT=52.1672117 PX4_HOME_LON=20.99803 make px4_sitl gazebo`
 
 ## Bugs
-- [ ] circle waypoint generated with wrong latitude
+- [x] circle waypoint generated with wrong latitude
 
 ## TODO
 - [ ] function (drone height) => circle radius (min, max)

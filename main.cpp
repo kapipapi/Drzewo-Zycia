@@ -90,7 +90,7 @@ int main() {
             mission_raw.pause_mission();
             std::cout << "Mission paused.\n";
 
-            for (const auto& cts: output.circlesToShoot) {
+            for (const auto &cts: output.circlesToShoot) {
                 sleep_for(seconds(1));
                 std::cout << "shooting circle: " << cts << std::endl;
 
@@ -100,7 +100,7 @@ int main() {
                     continue;
                 }
 
-                auto hold_result =action.hold();
+                auto hold_result = action.hold();
                 if (hold_result != Action::Result::Success) {
                     std::cout << "HOLD failed: " << hold_result << '\n';
                     continue;
