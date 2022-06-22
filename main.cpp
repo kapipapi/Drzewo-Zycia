@@ -45,7 +45,10 @@ std::shared_ptr<System> get_system(Mavsdk &mavsdk) {
 
 int main() {
     std::string SIM_URL = "udp://:14540";
-    std::string MISSION_PATH = "../missions/drzewo_zycia_v2_short.plan";
+    std::string MISSION_PATH = "../missions/drzewo_zycia_v3_siata.plan";
+
+    const float SHOOTING_HEIGHT = 10.0;
+    const float SHOOTING_HDG = 0.0;
 
     Mavsdk mavsdk;
     ConnectionResult connection_result = mavsdk.add_any_connection(SIM_URL);
@@ -64,7 +67,7 @@ int main() {
     auto telemetry = Telemetry{system};
     auto action = Action{system};
     auto mission_raw = MissionRaw{system};
-    auto camera = CameraThread{};
+    auto camera = CameraThread{&telemetry};
 
     // We want to listen to the altitude of the drone at 1 Hz.
     const auto set_rate_result = telemetry.set_rate_position(1.0);
@@ -78,14 +81,38 @@ int main() {
         std::cout << "Altitude: " << position.relative_altitude_m << " m\n";
     });
 
-
     std::cout << "Video capture initialization.\n";
 
     namedWindow("camera", WINDOW_NORMAL);
     std::thread camera_thread(CameraThread::RunThread, &camera);
-    camera.subscribe_camera_output([](CameraThread::CameraOutput output){
-        imshow("camera", output.frame);
-        waitKey(10);
+    camera.subscribe_camera_output([&](const CameraThread::CameraOutput &output) {
+        if (!output.circlesToShoot.empty()) {
+            mission_raw.pause_mission();
+            std::cout << "Mission paused.\n";
+
+            for (const auto& cts: output.circlesToShoot) {
+                sleep_for(seconds(1));
+                std::cout << "shooting circle: " << cts << std::endl;
+
+                auto goto_result = action.goto_location(cts.x, cts.y, SHOOTING_HEIGHT, SHOOTING_HDG);
+                if (goto_result != Action::Result::Success) {
+                    std::cout << "Goto circle failed: " << goto_result << '\n';
+                    continue;
+                }
+
+                auto hold_result =action.hold();
+                if (hold_result != Action::Result::Success) {
+                    std::cout << "HOLD failed: " << hold_result << '\n';
+                    continue;
+                }
+
+                // SHOOT
+
+                sleep_for(seconds(1));
+            }
+            mission_raw.start_mission();
+            std::cout << "Mission resumed.\n";
+        }
     });
 
     std::cout << "Camera ready.\n";
@@ -159,18 +186,18 @@ int main() {
     }
     std::cout << "Commanded RTL.\n";
 
-
-    auto landingActionPromise = std::promise<bool>{};
+    auto landingActionPromise = std::promise<void>{};
     auto landingActionFuture = landingActionPromise.get_future();
 
     telemetry.subscribe_landed_state([&landingActionPromise](Telemetry::LandedState result) {
         if (result == Telemetry::LandedState::OnGround) {
-            landingActionPromise.set_value(true);
+            landingActionPromise.set_value();
         }
     });
 
     // wait for landing complete
-    while (landingActionFuture.valid() && !landingActionFuture.get()) {}
+    landingActionFuture.get();
+    telemetry.subscribe_landed_state(nullptr);
 
     std::cout << "Landed. Thanks for flying with WUThrust.\n";
 
