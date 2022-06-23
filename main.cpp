@@ -45,7 +45,7 @@ std::shared_ptr<System> get_system(Mavsdk &mavsdk) {
 
 int main() {
     std::string SIM_URL = "udp://:14540";
-    std::string MISSION_PATH = "../missions/drzewo_zycia_v3_siata.plan";
+    std::string MISSION_PATH = "../missions/drzewo_zycia_v4_one_position.plan";
 
     const float SHOOTING_HEIGHT = 10.0;
     const float SHOOTING_HDG = 0.0;
@@ -106,7 +106,29 @@ int main() {
                     continue;
                 }
 
+                // GET NEW FRAME TO PRECISE CIRCLE POSITION
+                auto detectedCirclesGPS = camera.getGPSPositionOfCirclesInPicture(camera._camera_output.frame);
+                auto newCirclesToShoot = camera.filterAlreadyShootedCircles(detectedCirclesGPS);
+
+                if (newCirclesToShoot.size() != 1) {
+                    std::cout << "!!!!!!!! cos poszlo nie tak, za duzo kółek po korekcie pozycji" << std::endl;
+                }
+
+                // GOTO new position
+                auto goto_2_result = action.goto_location(cts.x, cts.y, SHOOTING_HEIGHT, SHOOTING_HDG);
+                if (goto_2_result != Action::Result::Success) {
+                    std::cout << "Goto circle failed: " << goto_2_result << '\n';
+                    continue;
+                }
+
+                auto hold_2_result = action.hold();
+                if (hold_2_result != Action::Result::Success) {
+                    std::cout << "HOLD failed: " << hold_2_result << '\n';
+                    continue;
+                }
+
                 // SHOOT
+                std::cout << "SHOOT DAMN" << std::endl;
 
                 sleep_for(seconds(1));
             }

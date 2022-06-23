@@ -76,6 +76,7 @@
 						"m",
 						"gcc_s",
 						"gcc",
+						"pthread",
 						"c",
 						"gcc_s",
 						"gcc"
