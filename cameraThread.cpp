@@ -92,17 +92,21 @@ public:
                 circle(tmp_frame, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
             }
 
-//            for (auto circle: circles) {
-//                int rowRangeStart = std::max(int(circle[1] - circle[2]), 0);
-//                auto rowRangeEnd = std::min(int(circle[1] + circle[2] + 1), tmp_frame.rows);
-//                auto colRangeStart = std::max(int(circle[0] - circle[2]), 0);
-//                auto colRangeEnd = std::min(int(circle[0] + circle[2] + 1), tmp_frame.cols);
-//
-//                cv::Mat roi = tmp_frame(cv::Range(rowRangeStart, rowRangeEnd),
-//                                        cv::Range(colRangeStart, colRangeEnd));
-//            }
+            for (auto circle: circles) {
+                int rowRangeStart = std::max(int(circle[1] - circle[2]), 0);
+                auto rowRangeEnd = std::min(int(circle[1] + circle[2] + 1), tmp_frame.rows);
+                auto colRangeStart = std::max(int(circle[0] - circle[2]), 0);
+                auto colRangeEnd = std::min(int(circle[0] + circle[2] + 1), tmp_frame.cols);
 
-//            todo: filter out circles with color
+                cv::Mat roi = tmp_frame(cv::Range(rowRangeStart, rowRangeEnd),
+                                        cv::Range(colRangeStart, colRangeEnd));
+
+                cv::Mat1i mask(roi.size());
+                cv::circle(mask, Point(roi.rows / 2, roi.cols / 2), circle[2], cv::Scalar::all(255), -1);
+                cv::Scalar roi_mean = cv::mean(roi, mask);
+
+//                todo: test if color of cricle is near color that need to be detect
+            }
 
             // pass frame to callback
             _camera_output.frame = tmp_frame;
