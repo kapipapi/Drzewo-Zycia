@@ -18,6 +18,8 @@ class CameraThread {
     const double MinDistanceBetweeenCirclesCenters_px = 500;
     const double focal_length_px = 100;
 
+    const double circleRadius_m = 1.0;
+
     std::string videoPath;
 
 public:
@@ -109,7 +111,23 @@ public:
         return min.second;
     }
 
-    std::vector<Tree> getGPSPositionOfCirclesInPicture(Mat image) {
+    std::pair<int, int> getCircleRadius(Telemetry::Position position) {
+        double altitude_m = position.relative_altitude_m;
+
+        double approx_radius_px = (circleRadius_m * focal_length_px) / altitude_m;
+
+        double error_rate = 0.1; // 10% up and down
+
+        int min = int(approx_radius_px * (1 - error_rate));
+        int max = int(approx_radius_px * (1 + error_rate));
+
+        return std::pair{min, max};
+    }
+
+    std::vector<Tree> getGPSPositionOfCirclesInPicture(
+            Mat image,
+            mavsdk::Telemetry::Position position,
+            double heading_deg) {
         Mat gray;
         cvtColor(image, gray, COLOR_BGR2GRAY);
         medianBlur(gray, gray, 5);
@@ -117,8 +135,10 @@ public:
         std::vector<Vec3f> circles;
 
 //            todo: function (drone height) => circle radius (min, max)
+        std::pair circle_radius = getCircleRadius(position);
 
-        HoughCircles(gray, circles, HOUGH_GRADIENT, 1, MinDistanceBetweeenCirclesCenters_px, 100, 30, 30, 50);
+        HoughCircles(gray, circles, HOUGH_GRADIENT, 1, MinDistanceBetweeenCirclesCenters_px, 100, 30,
+                     circle_radius.first, circle_radius.second);
 
 
         std::vector<Circle> output_circles;
@@ -148,7 +168,7 @@ public:
         _camera_output.frame = image;
 
         // calculate GPS positions of detected circles
-        return circlesToGPSPositions(output_circles);
+        return circlesToGPSPositions(output_circles, position, heading_deg);
     }
 
     std::vector<Tree> filterAlreadyShootedCircles(const std::vector<Tree> &detectedCircles) {
@@ -200,6 +220,9 @@ public:
         while (keepRunning) {
             std::lock_guard<Mutex> lock(_camera_output_subscription.mutex);
 
+            auto position = telemetry->position();
+            auto heading_deg = telemetry->heading().heading_deg;
+
             if (!cap.isOpened()) {
                 std::cerr << "Camera not opened\n";
 
@@ -225,7 +248,7 @@ public:
 
 //            todo: detect healthy trees (WHITE RECTANGLES)
 
-            auto detectedCircles_GPS = getGPSPositionOfCirclesInPicture(new_frame);
+            auto detectedCircles_GPS = getGPSPositionOfCirclesInPicture(new_frame, position, heading_deg);
             std::vector<Tree> circlesToShoot_GPS = filterAlreadyShootedCircles(detectedCircles_GPS);
 
             // add new circles to shoot to array already shot
@@ -242,11 +265,13 @@ public:
         }
     }
 
-    std::vector<Tree> circlesToGPSPositions(const std::vector<Circle> &circles) {
+    std::vector<Tree> circlesToGPSPositions(const std::vector<Circle> &circles,
+                                            mavsdk::Telemetry::Position position,
+                                            double heading_deg) {
         std::vector<Tree> tmpCirclesPositions;
         for (auto c: circles) {
             auto center = Point2d(c.x, c.y);
-            tmpCirclesPositions.push_back(calculateGPSPosition(center, c.type));
+            tmpCirclesPositions.push_back(calculateGPSPosition(center, c.type, position, heading_deg));
         }
 
         return tmpCirclesPositions;
@@ -292,9 +317,8 @@ public:
         return -angle_rad;
     }
 
-    Tree calculateGPSPosition(const Point2d &circleCenter, TreeType type) {
-        auto position = telemetry->position();
-
+    Tree calculateGPSPosition(const Point2d &circleCenter, TreeType type, mavsdk::Telemetry::Position position,
+                              double heading_deg) {
         auto altitude_m = position.relative_altitude_m;
 
         auto lat = position.latitude_deg;
@@ -302,7 +326,7 @@ public:
 
         auto lat_rad = lat * CV_PI / 180;
         auto lon_rad = lon * CV_PI / 180;
-        auto heading_rad = telemetry->heading().heading_deg * CV_PI / 180;
+        auto heading_rad = heading_deg * CV_PI / 180;
 
         auto distance_m = calculateDistanceFromImageCenterToCircle_m(circleCenter, altitude_m);
         auto heading_offset_rad = calculateBearingFromDroneHeadingToCirclePosition_rad(circleCenter);
