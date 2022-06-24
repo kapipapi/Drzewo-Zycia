@@ -67,7 +67,7 @@ int main() {
     auto telemetry = Telemetry{system};
     auto action = Action{system};
     auto mission_raw = MissionRaw{system};
-    auto camera = CameraThread{&telemetry};
+    auto camera = CameraThread{&telemetry, "/home/kacper/Downloads/test_video.mp4"};
 
     // We want to listen to the altitude of the drone at 1 Hz.
     const auto set_rate_result = telemetry.set_rate_position(1.0);
@@ -92,9 +92,9 @@ int main() {
 
             for (const auto &cts: output.circlesToShoot) {
                 sleep_for(seconds(1));
-                std::cout << "shooting circle: " << cts << std::endl;
+                std::cout << "shooting circle: " << cts.lat << "," << cts.lon << ", type: " << cts.type << std::endl;
 
-                auto goto_result = action.goto_location(cts.x, cts.y, SHOOTING_HEIGHT, SHOOTING_HDG);
+                auto goto_result = action.goto_location(cts.lat, cts.lon, SHOOTING_HEIGHT, SHOOTING_HDG);
                 if (goto_result != Action::Result::Success) {
                     std::cout << "Goto circle failed: " << goto_result << '\n';
                     continue;
@@ -115,7 +115,7 @@ int main() {
                 }
 
                 // GOTO new position
-                auto goto_2_result = action.goto_location(cts.x, cts.y, SHOOTING_HEIGHT, SHOOTING_HDG);
+                auto goto_2_result = action.goto_location(cts.lat, cts.lon, SHOOTING_HEIGHT, SHOOTING_HDG);
                 if (goto_2_result != Action::Result::Success) {
                     std::cout << "Goto circle failed: " << goto_2_result << '\n';
                     continue;
