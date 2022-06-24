@@ -134,7 +134,6 @@ public:
 
         std::vector<Vec3f> circles;
 
-//            todo: function (drone height) => circle radius (min, max)
         std::pair circle_radius = getCircleRadius(position);
 
         HoughCircles(gray, circles, HOUGH_GRADIENT, 1, MinDistanceBetweeenCirclesCenters_px, 100, 30,
@@ -194,6 +193,84 @@ public:
         return circlesToShootGPS;
     }
 
+    static double angle(Point pt1, Point pt2, Point pt0) {
+        double dx1 = pt1.x - pt0.x;
+        double dy1 = pt1.y - pt0.y;
+        double dx2 = pt2.x - pt0.x;
+        double dy2 = pt2.y - pt0.y;
+        return (dx1 * dx2 + dy1 * dy2) / sqrt((dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
+    }
+
+    std::vector<Tree> findHealthyTrees(const Mat &image, Telemetry::Position position, double heading_deg) {
+        Mat gray0(image.size(), CV_8U), gray;
+        int thresh = 50, N = 11;
+//        cvtColor(image, gray, COLOR_BGR2GRAY);
+//        medianBlur(gray, gray, 5);
+
+        std::vector<std::vector<Point> > contours;
+        std::vector<std::vector<Point> > squares;
+
+        // find squares in every color plane of the image
+        for (int c = 0; c < 3; c++) {
+            int ch[] = {c, 0};
+            mixChannels(&image, 1, &gray0, 1, ch, 1);
+            // try several threshold levels
+            for (int l = 0; l < N; l++) {
+                // hack: use Canny instead of zero threshold level.
+                // Canny helps to catch squares with gradient shading
+                if (l == 0) {
+                    // apply Canny. Take the upper threshold from slider
+                    // and set the lower to 0 (which forces edges merging)
+                    Canny(gray0, gray, 0, thresh, 5);
+                    // dilate canny output to remove potential
+                    // holes between edge segments
+                    dilate(gray, gray, Mat(), Point(-1, -1));
+                } else {
+                    // apply threshold if l!=0:
+                    //     tgray(x,y) = gray(x,y) < (l+1)*255/N ? 255 : 0
+                    gray = gray0 >= (l + 1) * 255 / N;
+                }
+                // find contours and store them all as a list
+                findContours(gray, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+                std::vector<Point> approx;
+                // test each contour
+                for (size_t i = 0; i < contours.size(); i++) {
+                    // approximate contour with accuracy proportional
+                    // to the contour perimeter
+                    approxPolyDP(contours[i], approx, arcLength(contours[i], true) * 0.02, true);
+                    // square contours should have 4 vertices after approximation
+                    // relatively large area (to filter out noisy contours)
+                    // and be convex.
+                    // Note: absolute value of an area is used because
+                    // area may be positive or negative - in accordance with the
+                    // contour orientation
+                    if (approx.size() == 4 &&
+                        fabs(contourArea(approx)) > 1000 &&
+                        isContourConvex(approx)) {
+                        double maxCosine = 0;
+                        for (int j = 2; j < 5; j++) {
+                            // find the maximum cosine of the angle between joint edges
+                            double cosine = fabs(angle(approx[j % 4], approx[j - 2], approx[j - 1]));
+                            maxCosine = MAX(maxCosine, cosine);
+                        }
+                        // if cosines of all angles are small
+                        // (all angles are ~90 degree) then write quandrange
+                        // vertices to resultant sequence
+                        if (maxCosine < 0.3) squares.push_back(approx);
+                    }
+                }
+            }
+        }
+
+        std::vector<Tree> healthy_trees;
+
+        for(auto sq : squares) {
+//            healthy_trees.push_back(Tree{sq.})
+        }
+
+        return std::vector<Tree>{};
+    }
+
     void run() {
         if (videoPath.empty()) {
             cap.open(0);
@@ -247,6 +324,7 @@ public:
             }
 
 //            todo: detect healthy trees (WHITE RECTANGLES)
+            std::vector healthyTrees = findHealthyTrees(new_frame, position, heading_deg);
 
             auto detectedCircles_GPS = getGPSPositionOfCirclesInPicture(new_frame, position, heading_deg);
             std::vector<Tree> circlesToShoot_GPS = filterAlreadyShootedCircles(detectedCircles_GPS);

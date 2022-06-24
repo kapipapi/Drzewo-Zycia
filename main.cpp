@@ -67,7 +67,7 @@ int main() {
     auto telemetry = Telemetry{system};
     auto action = Action{system};
     auto mission_raw = MissionRaw{system};
-    auto camera = CameraThread{&telemetry, "/home/kacper/Downloads/test_video.mp4"};
+    auto camera = CameraThread{&telemetry, ""};
 
     // We want to listen to the altitude of the drone at 1 Hz.
     const auto set_rate_result = telemetry.set_rate_position(1.0);
