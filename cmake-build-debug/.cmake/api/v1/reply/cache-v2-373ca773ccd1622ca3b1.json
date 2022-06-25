@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "3"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1148,6 +1148,78 @@
 			],
 			"type" : "PATH",
 			"value" : "/usr/share/OpenCV"
+		},
+		{
+			"name" : "algorithm_wip_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip"
+		},
+		{
+			"name" : "algorithm_wip_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "algorithm_wip_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/algorithm_wip"
+		},
+		{
+			"name" : "camera_calibration_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration"
+		},
+		{
+			"name" : "camera_calibration_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "camera_calibration_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/camera_calibration"
 		},
 		{
 			"name" : "drzewo_zycia_BINARY_DIR",

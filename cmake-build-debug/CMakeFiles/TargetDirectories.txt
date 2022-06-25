@@ -1,3 +1,9 @@
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/CMakeFiles/drzewo_zycia.dir
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration/CMakeFiles/camera_calibration.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration/CMakeFiles/edit_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration/CMakeFiles/rebuild_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip/CMakeFiles/algorithm_wip.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip/CMakeFiles/edit_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip/CMakeFiles/rebuild_cache.dir

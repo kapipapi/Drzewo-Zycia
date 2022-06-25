@@ -6,6 +6,9 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 project(drzewo_zycia)
 
+add_subdirectory(camera_calibration)
+add_subdirectory(algorithm_wip)
+
 add_executable(drzewo_zycia main.cpp cameraThread.cpp)
 
 find_package(MAVSDK REQUIRED)

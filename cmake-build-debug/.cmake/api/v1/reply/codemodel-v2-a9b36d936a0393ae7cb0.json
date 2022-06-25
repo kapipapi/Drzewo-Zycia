@@ -1,0 +1,138 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "camera_calibration",
+					"jsonFile" : "directory-camera_calibration-Debug-0962cf0339a6dad5908d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "camera_calibration",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "algorithm_wip",
+					"jsonFile" : "directory-algorithm_wip-Debug-5216a6adb9a9c6d876d0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "algorithm_wip",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "drzewo_zycia",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "camera_calibration",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "algorithm_wip",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "algorithm_wip::@b791158efc4b8aa02917",
+					"jsonFile" : "target-algorithm_wip-Debug-423bad331c2c44c14404.json",
+					"name" : "algorithm_wip",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "camera_calibration::@b4b4666ec2855bde0a2f",
+					"jsonFile" : "target-camera_calibration-Debug-decc8bbf617d1ddafdfd.json",
+					"name" : "camera_calibration",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "drzewo_zycia::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-drzewo_zycia-Debug-d77510bfddf6f7ce202a.json",
+					"name" : "drzewo_zycia",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug",
+		"source" : "/home/kacper/CLionProjects/drzewo_zycia"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

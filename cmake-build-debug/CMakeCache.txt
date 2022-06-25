@@ -213,6 +213,24 @@ MAVSDK_DIR:PATH=/usr/local/lib/cmake/MAVSDK
 OpenCV_DIR:PATH=/usr/share/OpenCV
 
 //Value Computed by CMake
+algorithm_wip_BINARY_DIR:STATIC=/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip
+
+//Value Computed by CMake
+algorithm_wip_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+algorithm_wip_SOURCE_DIR:STATIC=/home/kacper/CLionProjects/drzewo_zycia/algorithm_wip
+
+//Value Computed by CMake
+camera_calibration_BINARY_DIR:STATIC=/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration
+
+//Value Computed by CMake
+camera_calibration_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+camera_calibration_SOURCE_DIR:STATIC=/home/kacper/CLionProjects/drzewo_zycia/camera_calibration
+
+//Value Computed by CMake
 drzewo_zycia_BINARY_DIR:STATIC=/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
 
 //Value Computed by CMake
@@ -324,7 +342,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

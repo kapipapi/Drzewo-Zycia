@@ -55,8 +55,6 @@ build CMakeFiles/drzewo_zycia.dir/main.cpp.o: CXX_COMPILER__drzewo_zycia_Debug /
   INCLUDES = -isystem /usr/include/opencv -isystem /usr/local/include/mavsdk
   OBJECT_DIR = CMakeFiles/drzewo_zycia.dir
   OBJECT_FILE_DIR = CMakeFiles/drzewo_zycia.dir
-  TARGET_COMPILE_PDB = CMakeFiles/drzewo_zycia.dir/
-  TARGET_PDB = drzewo_zycia.pdb
 
 build CMakeFiles/drzewo_zycia.dir/cameraThread.cpp.o: CXX_COMPILER__drzewo_zycia_Debug /home/kacper/CLionProjects/drzewo_zycia/cameraThread.cpp || cmake_object_order_depends_target_drzewo_zycia
   DEP_FILE = CMakeFiles/drzewo_zycia.dir/cameraThread.cpp.o.d
@@ -64,8 +62,6 @@ build CMakeFiles/drzewo_zycia.dir/cameraThread.cpp.o: CXX_COMPILER__drzewo_zycia
   INCLUDES = -isystem /usr/include/opencv -isystem /usr/local/include/mavsdk
   OBJECT_DIR = CMakeFiles/drzewo_zycia.dir
   OBJECT_FILE_DIR = CMakeFiles/drzewo_zycia.dir
-  TARGET_COMPILE_PDB = CMakeFiles/drzewo_zycia.dir/
-  TARGET_PDB = drzewo_zycia.pdb
 
 
 # =============================================================================
@@ -81,9 +77,8 @@ build drzewo_zycia: CXX_EXECUTABLE_LINKER__drzewo_zycia_Debug CMakeFiles/drzewo_
   OBJECT_DIR = CMakeFiles/drzewo_zycia.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/drzewo_zycia.dir/
   TARGET_FILE = drzewo_zycia
-  TARGET_PDB = drzewo_zycia.pdb
+  TARGET_PDB = drzewo_zycia.dbg
 
 
 #############################################
@@ -110,7 +105,142 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/kacper/CLionProjects/drzewo_zycia/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target camera_calibration
+
+
+#############################################
+# Order-only phony target for camera_calibration
+
+build cmake_object_order_depends_target_camera_calibration: phony || camera_calibration/CMakeFiles/camera_calibration.dir
+
+build camera_calibration/CMakeFiles/camera_calibration.dir/main.cpp.o: CXX_COMPILER__camera_calibration_Debug /home/kacper/CLionProjects/drzewo_zycia/camera_calibration/main.cpp || cmake_object_order_depends_target_camera_calibration
+  DEP_FILE = camera_calibration/CMakeFiles/camera_calibration.dir/main.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = camera_calibration/CMakeFiles/camera_calibration.dir
+  OBJECT_FILE_DIR = camera_calibration/CMakeFiles/camera_calibration.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target camera_calibration
+
+
+#############################################
+# Link the executable camera_calibration/camera_calibration
+
+build camera_calibration/camera_calibration: CXX_EXECUTABLE_LINKER__camera_calibration_Debug camera_calibration/CMakeFiles/camera_calibration.dir/main.cpp.o | /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  FLAGS = -pthread -pthread -g
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  OBJECT_DIR = camera_calibration/CMakeFiles/camera_calibration.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = camera_calibration/camera_calibration
+  TARGET_PDB = camera_calibration.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build camera_calibration/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration && /snap/clion/198/bin/cmake/linux/bin/ccmake -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build camera_calibration/edit_cache: phony camera_calibration/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build camera_calibration/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration && /snap/clion/198/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build camera_calibration/rebuild_cache: phony camera_calibration/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/kacper/CLionProjects/drzewo_zycia/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target algorithm_wip
+
+
+#############################################
+# Order-only phony target for algorithm_wip
+
+build cmake_object_order_depends_target_algorithm_wip: phony || algorithm_wip/CMakeFiles/algorithm_wip.dir
+
+build algorithm_wip/CMakeFiles/algorithm_wip.dir/main.cpp.o: CXX_COMPILER__algorithm_wip_Debug /home/kacper/CLionProjects/drzewo_zycia/algorithm_wip/main.cpp || cmake_object_order_depends_target_algorithm_wip
+  DEP_FILE = algorithm_wip/CMakeFiles/algorithm_wip.dir/main.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = algorithm_wip/CMakeFiles/algorithm_wip.dir
+  OBJECT_FILE_DIR = algorithm_wip/CMakeFiles/algorithm_wip.dir
+
+build algorithm_wip/CMakeFiles/algorithm_wip.dir/__/cameraThread.cpp.o: CXX_COMPILER__algorithm_wip_Debug /home/kacper/CLionProjects/drzewo_zycia/cameraThread.cpp || cmake_object_order_depends_target_algorithm_wip
+  DEP_FILE = algorithm_wip/CMakeFiles/algorithm_wip.dir/__/cameraThread.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = algorithm_wip/CMakeFiles/algorithm_wip.dir
+  OBJECT_FILE_DIR = algorithm_wip/CMakeFiles/algorithm_wip.dir/__
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target algorithm_wip
+
+
+#############################################
+# Link the executable algorithm_wip/algorithm_wip
+
+build algorithm_wip/algorithm_wip: CXX_EXECUTABLE_LINKER__algorithm_wip_Debug algorithm_wip/CMakeFiles/algorithm_wip.dir/main.cpp.o algorithm_wip/CMakeFiles/algorithm_wip.dir/__/cameraThread.cpp.o | /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  FLAGS = -pthread -pthread -g
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  OBJECT_DIR = algorithm_wip/CMakeFiles/algorithm_wip.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = algorithm_wip/algorithm_wip
+  TARGET_PDB = algorithm_wip.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build algorithm_wip/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip && /snap/clion/198/bin/cmake/linux/bin/ccmake -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build algorithm_wip/edit_cache: phony algorithm_wip/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build algorithm_wip/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip && /snap/clion/198/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build algorithm_wip/rebuild_cache: phony algorithm_wip/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
+
+build algorithm_wip: phony algorithm_wip/algorithm_wip
+
+build camera_calibration: phony camera_calibration/camera_calibration
 
 # =============================================================================
 # Folder targets.
@@ -120,7 +250,21 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
 
-build all: phony drzewo_zycia
+build all: phony drzewo_zycia camera_calibration/all algorithm_wip/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip
+
+build algorithm_wip/all: phony algorithm_wip/algorithm_wip
+
+# =============================================================================
+
+#############################################
+# Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/camera_calibration
+
+build camera_calibration/all: phony camera_calibration/camera_calibration
 
 # =============================================================================
 # Built-in targets
@@ -129,14 +273,14 @@ build all: phony drzewo_zycia
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompilerABI.c /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystem.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-Determine-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompilerABI.c /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystem.cmake.in /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-FindBinUtils.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-Determine-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
 
 
 #############################################

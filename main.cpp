@@ -109,8 +109,9 @@ int main() {
                 // GET NEW FRAME TO PRECISE CIRCLE POSITION
                 auto position = telemetry.position();
                 auto heading = telemetry.heading().heading_deg;
-                auto detectedCirclesGPS = camera.getGPSPositionOfCirclesInPicture(camera._camera_output.frame, position,
-                                                                                  heading);
+                auto detectedCircles = camera.getCirclesInImage(camera._camera_output.frame,
+                                                                position.relative_altitude_m);
+                auto detectedCirclesGPS = camera.circlesToGPSPositions(detectedCircles, position, heading);
                 auto newCirclesToShoot = camera.filterAlreadyShootedCircles(detectedCirclesGPS);
 
                 if (newCirclesToShoot.size() != 1) {
