@@ -14,17 +14,17 @@ using namespace cv;
 using namespace mavsdk;
 
 class CameraThread {
+public:
     const double MaximumDistanceToBeSame_m = 1; //center to center in meters
     const double MinDistanceBetweeenCirclesCenters_px = 500;
-    const double focal_length_px = 2000;
 
+    double focal_length_px = 984.045224;
     const double circleRadius_m = 0.5;
-    const double squareSide_m = 0.5;
-    double pixel_calculation_error_rate = 0.2; // 10% up and down
+    const double squareSide_m = 1;
+
+    double pixel_calculation_error_rate = 0.1; // 10% up and down
 
     std::string videoPath;
-
-public:
 
     CameraThread() = default;
 
@@ -33,7 +33,7 @@ public:
         this->videoPath = videoPath;
     }
 
-    bool DRAWING = false;
+    bool DRAWING = true;
 
     Telemetry *telemetry;
 
@@ -57,6 +57,12 @@ public:
             std::pair{pathogen_gold, pathogen_gold_tree},
             std::pair{pathogen_beige, pathogen_beige_tree}
     };
+
+    Mat getFreshFrame() {
+        Mat newframe;
+        cap >> newframe;
+        return newframe;
+    }
 
     struct Circle {
         double x;
@@ -172,7 +178,7 @@ public:
 
         std::pair circle_radius = getCircleRadius(altitude_m);
 
-        HoughCircles(gray, circles, HOUGH_GRADIENT, 1, MinDistanceBetweeenCirclesCenters_px, 100, 30,
+        HoughCircles(gray, circles, HOUGH_GRADIENT, 1, max(100, circle_radius.second * 4), 100, 30,
                      circle_radius.first, circle_radius.second);
 
 
@@ -195,9 +201,6 @@ public:
             Circle circ{circle[0], circle[1], circle[2], getTreeType(roi_mean)};
 
             if (circ.type != probably_grass) {
-                if (circ.type == vulnerable_tree) {
-                    std::cout << roi_mean << std::endl;
-                }
                 output_circles.push_back(circ);
             }
         }
@@ -232,94 +235,58 @@ public:
         return circlesToShootGPS;
     }
 
-    static double angle(Point pt1, Point pt2, Point pt0) {
-        double dx1 = pt1.x - pt0.x;
-        double dy1 = pt1.y - pt0.y;
-        double dx2 = pt2.x - pt0.x;
-        double dy2 = pt2.y - pt0.y;
-        return (dx1 * dx2 + dy1 * dy2) / sqrt((dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
-    }
-
-    bool isSquareAreaOK(double area_pxpx, double altitude_m) {
+    std::pair<double, double> squareAreaApprox(double altitude_m) {
         double approx_side_px = (squareSide_m * focal_length_px) / altitude_m;
 
         double apporx_area_pxpx = approx_side_px * approx_side_px;
 
-        double min_area_pxpx = apporx_area_pxpx * (1 - pixel_calculation_error_rate);
-        double max_area_pxpx = apporx_area_pxpx * (1 + pixel_calculation_error_rate);
+        double min_area_pxpx = apporx_area_pxpx * 0.1;
+        double max_area_pxpx = apporx_area_pxpx * 1;
 
-        return min_area_pxpx < area_pxpx && area_pxpx < max_area_pxpx;
+        return {min_area_pxpx, max_area_pxpx};
     }
 
     std::vector<std::vector<Point>>
     findHealthyTrees(const Mat &image, double altitude_m) {
-        Mat gray0(image.size(), CV_8U), gray;
-        int thresh = 50, N = 2;
-//        cvtColor(image, gray, COLOR_BGR2GRAY);
-//        medianBlur(gray, gray, 5);
+        Mat gray;
 
         std::vector<std::vector<Point>> contours;
         std::vector<std::vector<Point>> squares;
 
-        for (int l = 0; l < N; l++) {
-            // hack: use Canny instead of zero threshold level.
-            // Canny helps to catch squares with gradient shading
-            if (l == 0) {
-                // apply Canny. Take the upper threshold from slider
-                // and set the lower to 0 (which forces edges merging)
-                Canny(gray0, gray, 0, thresh, 5);
-                // dilate canny output to remove potential
-                // holes between edge segments
-                dilate(gray, gray, Mat(), Point(-1, -1));
-            } else {
-                // apply threshold if l!=0:
-                //     tgray(x,y) = gray(x,y) < (l+1)*255/N ? 255 : 0
-                gray = gray0 >= (l + 1) * 255 / N;
-            }
-            // find contours and store them all as a list
-            findContours(gray, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
-            std::vector<Point> approx;
-            // test each contour
-            for (size_t i = 0; i < contours.size(); i++) {
-                // approximate contour with accuracy proportional
-                // to the contour perimeter
-                approxPolyDP(contours[i], approx, arcLength(contours[i], true) * 0.02, true);
-                // square contours should have 4 vertices after approximation
-                // relatively large area (to filter out noisy contours)
-                // and be convex.
-                // Note: absolute value of an area is used because
-                // area may be positive or negative - in accordance with the
-                // contour orientation
-                auto area = fabs(contourArea(approx));
-                if (approx.size() == 4 &&
-                    isSquareAreaOK(area, altitude_m) &&
-                    isContourConvex(approx)) {
+        cv::cvtColor(image, gray, COLOR_BGR2GRAY);
+        cv::threshold(gray, gray, 180, 255, THRESH_BINARY);
 
-                    double maxCosine = 0;
-                    for (int j = 2; j < 5; j++) {
-                        // find the maximum cosine of the angle between joint edges
-                        double cosine = fabs(angle(approx[j % 4], approx[j - 2], approx[j - 1]));
-                        maxCosine = MAX(maxCosine, cosine);
-                    }
-                    // if cosines of all angles are small
-                    // (all angles are ~90 degree) then write quandrange
-                    // vertices to resultant sequence
-                    if (maxCosine < 0.3) {
-                        auto rect = boundingRect(approx);
-                        Mat mask(rect.height, rect.width, CV_8U);
-                        drawContours(mask, std::vector{approx}, 0, Scalar::all(255), -1);
-                        cv::Scalar rect_mean = cv::mean(image(rect), mask);
-                        auto color_diff = calculateColorDifference(healthy, rect_mean);
+        Mat element = getStructuringElement(MORPH_ERODE,
+                                            Size(3, 3),
+                                            Point(1, 1));
+        cv::erode(gray, gray, element, Point(-1, -1), 10);
 
-                        if (color_diff > 50) {
-                            continue;
-                        }
+        morphologyEx(gray, gray, MORPH_CLOSE, Mat(), Point(-1, -1), 100);
+        Canny(gray, gray, 0, 100, 5);
 
-                        if (DRAWING) drawContours(image, std::vector{approx}, 0, Scalar::all(0), 3);
+        Mat element2 = getStructuringElement(MORPH_DILATE,
+                                             Size(3, 3),
+                                             Point(1, 1));
+        cv::dilate(gray, gray, element2, Point(-1, -1), 10);
 
-                        squares.push_back(approx);
-                    }
-                }
+        // find contours and store them all as a list
+        findContours(gray, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+        std::vector<Point> approx;
+
+        auto area_approx = squareAreaApprox(altitude_m);
+
+        for (size_t i = 0; i < contours.size(); i++) {
+            approxPolyDP(contours[i], approx, arcLength(contours[i], true) * 0.1, true);
+            auto area = fabs(contourArea(approx));
+
+            if (approx.size() == 4 &&
+                area > area_approx.first &&
+                area < area_approx.second &&
+                isContourConvex(approx)) {
+
+                if (DRAWING) drawContours(image, std::vector{approx}, 0, Scalar::all(0), 3);
+
+                squares.push_back(approx);
             }
         }
 
@@ -340,6 +307,7 @@ public:
 
             Mat new_frame;
             cap >> new_frame;
+            resize(new_frame, new_frame, Size(1280, 720));
 
             if (!new_frame.empty()) {
                 std::lock_guard<Mutex> lock(_camera_output_subscription.mutex);
@@ -373,6 +341,7 @@ public:
 
             Mat new_frame;
             cap >> new_frame;
+            resize(new_frame, new_frame, Size(1280, 720));
 
             if (new_frame.empty()) {
                 return;

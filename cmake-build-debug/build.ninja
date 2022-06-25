@@ -236,11 +236,153 @@ build algorithm_wip/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build algorithm_wip/rebuild_cache: phony algorithm_wip/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/kacper/CLionProjects/drzewo_zycia/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target photo_test
+
+
+#############################################
+# Order-only phony target for photo_test
+
+build cmake_object_order_depends_target_photo_test: phony || photo_test/CMakeFiles/photo_test.dir
+
+build photo_test/CMakeFiles/photo_test.dir/main.cpp.o: CXX_COMPILER__photo_test_Debug /home/kacper/CLionProjects/drzewo_zycia/photo_test/main.cpp || cmake_object_order_depends_target_photo_test
+  DEP_FILE = photo_test/CMakeFiles/photo_test.dir/main.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = photo_test/CMakeFiles/photo_test.dir
+  OBJECT_FILE_DIR = photo_test/CMakeFiles/photo_test.dir
+
+build photo_test/CMakeFiles/photo_test.dir/__/cameraThread.cpp.o: CXX_COMPILER__photo_test_Debug /home/kacper/CLionProjects/drzewo_zycia/cameraThread.cpp || cmake_object_order_depends_target_photo_test
+  DEP_FILE = photo_test/CMakeFiles/photo_test.dir/__/cameraThread.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = photo_test/CMakeFiles/photo_test.dir
+  OBJECT_FILE_DIR = photo_test/CMakeFiles/photo_test.dir/__
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target photo_test
+
+
+#############################################
+# Link the executable photo_test/photo_test
+
+build photo_test/photo_test: CXX_EXECUTABLE_LINKER__photo_test_Debug photo_test/CMakeFiles/photo_test.dir/main.cpp.o photo_test/CMakeFiles/photo_test.dir/__/cameraThread.cpp.o | /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  FLAGS = -pthread -pthread -g
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  OBJECT_DIR = photo_test/CMakeFiles/photo_test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = photo_test/photo_test
+  TARGET_PDB = photo_test.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build photo_test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/photo_test && /snap/clion/198/bin/cmake/linux/bin/ccmake -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build photo_test/edit_cache: phony photo_test/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build photo_test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/photo_test && /snap/clion/198/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build photo_test/rebuild_cache: phony photo_test/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/kacper/CLionProjects/drzewo_zycia/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target live_video_test
+
+
+#############################################
+# Order-only phony target for live_video_test
+
+build cmake_object_order_depends_target_live_video_test: phony || live_video_test/CMakeFiles/live_video_test.dir
+
+build live_video_test/CMakeFiles/live_video_test.dir/main.cpp.o: CXX_COMPILER__live_video_test_Debug /home/kacper/CLionProjects/drzewo_zycia/live_video_test/main.cpp || cmake_object_order_depends_target_live_video_test
+  DEP_FILE = live_video_test/CMakeFiles/live_video_test.dir/main.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = live_video_test/CMakeFiles/live_video_test.dir
+  OBJECT_FILE_DIR = live_video_test/CMakeFiles/live_video_test.dir
+
+build live_video_test/CMakeFiles/live_video_test.dir/__/cameraThread.cpp.o: CXX_COMPILER__live_video_test_Debug /home/kacper/CLionProjects/drzewo_zycia/cameraThread.cpp || cmake_object_order_depends_target_live_video_test
+  DEP_FILE = live_video_test/CMakeFiles/live_video_test.dir/__/cameraThread.cpp.o.d
+  FLAGS = -pthread -pthread -g -std=gnu++1z
+  INCLUDES = -isystem /usr/include/opencv
+  OBJECT_DIR = live_video_test/CMakeFiles/live_video_test.dir
+  OBJECT_FILE_DIR = live_video_test/CMakeFiles/live_video_test.dir/__
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target live_video_test
+
+
+#############################################
+# Link the executable live_video_test/live_video_test
+
+build live_video_test/live_video_test: CXX_EXECUTABLE_LINKER__live_video_test_Debug live_video_test/CMakeFiles/live_video_test.dir/main.cpp.o live_video_test/CMakeFiles/live_video_test.dir/__/cameraThread.cpp.o | /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0 /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  FLAGS = -pthread -pthread -g
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0  /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
+  OBJECT_DIR = live_video_test/CMakeFiles/live_video_test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = live_video_test/live_video_test
+  TARGET_PDB = live_video_test.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build live_video_test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test && /snap/clion/198/bin/cmake/linux/bin/ccmake -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build live_video_test/edit_cache: phony live_video_test/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build live_video_test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test && /snap/clion/198/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/kacper/CLionProjects/drzewo_zycia -B/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build live_video_test/rebuild_cache: phony live_video_test/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build algorithm_wip: phony algorithm_wip/algorithm_wip
 
 build camera_calibration: phony camera_calibration/camera_calibration
+
+build live_video_test: phony live_video_test/live_video_test
+
+build photo_test: phony photo_test/photo_test
 
 # =============================================================================
 # Folder targets.
@@ -250,7 +392,7 @@ build camera_calibration: phony camera_calibration/camera_calibration
 #############################################
 # Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug
 
-build all: phony drzewo_zycia camera_calibration/all algorithm_wip/all
+build all: phony drzewo_zycia camera_calibration/all algorithm_wip/all photo_test/all live_video_test/all
 
 # =============================================================================
 
@@ -267,20 +409,34 @@ build algorithm_wip/all: phony algorithm_wip/algorithm_wip
 build camera_calibration/all: phony camera_calibration/camera_calibration
 
 # =============================================================================
+
+#############################################
+# Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test
+
+build live_video_test/all: phony live_video_test/live_video_test
+
+# =============================================================================
+
+#############################################
+# Folder: /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/photo_test
+
+build photo_test/all: phony photo_test/photo_test
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt ../live_video_test/CMakeLists.txt ../photo_test/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../algorithm_wip/CMakeLists.txt ../camera_calibration/CMakeLists.txt ../live_video_test/CMakeLists.txt ../photo_test/CMakeLists.txt /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake /usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake /usr/share/OpenCV/OpenCVConfig-version.cmake /usr/share/OpenCV/OpenCVConfig.cmake /usr/share/OpenCV/OpenCVModules-release.cmake /usr/share/OpenCV/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
 
 
 #############################################

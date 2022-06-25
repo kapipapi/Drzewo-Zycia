@@ -18,14 +18,14 @@ int main() {
     std::vector<cv::Point3f> objp;
     for (int i{0}; i < CHECKERBOARD[1]; i++) {
         for (int j{0}; j < CHECKERBOARD[0]; j++)
-            objp.push_back(cv::Point3f(j, i, 0));
+            objp.push_back(cv::Point3f(j * 21.4, i * 21.4, 0));
     }
 
 
     // Extracting path of individual image stored in a given directory
     std::vector<cv::String> images;
     // Path of the folder containing checkerboard images
-    std::string path = "./images/*.jpg";
+    std::string path = "/home/kacper/Pictures/calib/*.jpeg";
 
     cv::glob(path, images);
 

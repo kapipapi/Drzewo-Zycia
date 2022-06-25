@@ -751,7 +751,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "3"
+			"value" : "5"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1256,6 +1256,78 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/kacper/CLionProjects/drzewo_zycia"
+		},
+		{
+			"name" : "live_video_test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test"
+		},
+		{
+			"name" : "live_video_test_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "live_video_test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/live_video_test"
+		},
+		{
+			"name" : "photo_test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/photo_test"
+		},
+		{
+			"name" : "photo_test_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "photo_test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/kacper/CLionProjects/drzewo_zycia/photo_test"
 		}
 	],
 	"kind" : "cache",

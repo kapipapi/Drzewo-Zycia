@@ -40,16 +40,6 @@ int main() {
         }
 
         auto squares = camera.findHealthyTrees(frame, altitude_m);
-        std::vector<cameraThread::Tree> healthy_trees;
-        for (auto sq: squares) {
-            auto M = moments(sq);
-            double cX = M.m10 / M.m00;
-            double cY = M.m01 / M.m00;
-
-            calculateGPSPosition(Point(cX,cY),healthy_tree,position, heading)
-
-//            healthy_trees.push_back(Tree{sq.})
-        }
 
         cv::imshow("video", frame);
 

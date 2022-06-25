@@ -9,7 +9,9 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3,
+						4
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -52,6 +54,36 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "photo_test",
+					"jsonFile" : "directory-photo_test-Debug-6a216685c6d2623b4ddb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "photo_test",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "live_video_test",
+					"jsonFile" : "directory-live_video_test-Debug-5cafd0d10ffb775cd695.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "live_video_test",
+					"targetIndexes" : 
+					[
+						3
+					]
 				}
 			],
 			"name" : "Debug",
@@ -61,7 +93,9 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3,
+						4
 					],
 					"directoryIndexes" : 
 					[
@@ -95,6 +129,30 @@
 					"targetIndexes" : 
 					[
 						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "photo_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "live_video_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
 					]
 				}
 			],
@@ -117,9 +175,23 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "drzewo_zycia::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-drzewo_zycia-Debug-d77510bfddf6f7ce202a.json",
+					"jsonFile" : "target-drzewo_zycia-Debug-5345fa1a1aa9146fd108.json",
 					"name" : "drzewo_zycia",
 					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "live_video_test::@b862ace472f69532108d",
+					"jsonFile" : "target-live_video_test-Debug-2c4902928030c6165abe.json",
+					"name" : "live_video_test",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "photo_test::@30bf3bb382beb8f8d3d1",
+					"jsonFile" : "target-photo_test-Debug-d7ec328cde5beb7df5aa.json",
+					"name" : "photo_test",
+					"projectIndex" : 3
 				}
 			]
 		}

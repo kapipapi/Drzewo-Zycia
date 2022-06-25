@@ -225,6 +225,64 @@
 		{
 			"isExternal" : true,
 			"path" : "/usr/share/OpenCV/OpenCVModules-release.cmake"
+		},
+		{
+			"path" : "photo_test/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVModules.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVModules-release.cmake"
+		},
+		{
+			"path" : "live_video_test/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVModules.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/share/OpenCV/OpenCVModules-release.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
