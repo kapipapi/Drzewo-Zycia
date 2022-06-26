@@ -26,11 +26,35 @@ public:
 
     std::string videoPath;
 
+    cv::Mat cam_intrinsic{3, 3, CV_64FC1};
+    cv::Mat distCoeffs{5, 1, CV_64FC1};
+
     CameraThread() = default;
 
     CameraThread(Telemetry *telemetry, const std::string &videoPath = "") {
         this->telemetry = telemetry;
         this->videoPath = videoPath;
+        this->setCameraMatrix();
+    }
+
+    void setCameraMatrix() {
+        cam_intrinsic.at<double>(0, 0) = 986.0116328851432;
+        cam_intrinsic.at<double>(1, 0) = 0.0;
+        cam_intrinsic.at<double>(2, 0) = 0.0;
+
+        cam_intrinsic.at<double>(0, 1) = 0.0;
+        cam_intrinsic.at<double>(1, 1) = 982.0788151145993;
+        cam_intrinsic.at<double>(2, 1) = 0.0;
+
+        cam_intrinsic.at<double>(0, 2) = 687.6426355899254;
+        cam_intrinsic.at<double>(1, 2) = 365.6470526046041;
+        cam_intrinsic.at<double>(2, 2) = 1.0;
+
+        distCoeffs.at<double>(0) = -0.4975842106721171;
+        distCoeffs.at<double>(1) = 0.2559664966234141;
+        distCoeffs.at<double>(2) = 0.003222902493099889;
+        distCoeffs.at<double>(3) = -0.0001964051137438205;
+        distCoeffs.at<double>(4) = -0.05437674161052661;
     }
 
     bool DRAWING = true;
@@ -61,7 +85,11 @@ public:
     Mat getFreshFrame() {
         Mat newframe;
         cap >> newframe;
-        return newframe;
+
+        Mat imageUndistorted;
+        undistort(newframe, imageUndistorted, cam_intrinsic, distCoeffs);
+
+        return imageUndistorted;
     }
 
     struct Circle {
@@ -77,6 +105,11 @@ public:
         TreeType type;
     };
 
+    struct Square {
+        std::vector<Point> contour;
+        TreeType type;
+    };
+
     VideoCapture cap;
 
     struct CameraOutput {
@@ -84,7 +117,7 @@ public:
         std::vector<Tree> circlesToShoot;
     };
 
-    std::vector<Tree> circlesAlreadyShooted;
+    std::vector<Tree> treesAlreadyShot;
 
     CameraOutput _camera_output = {};
 
@@ -212,27 +245,26 @@ public:
         return output_circles;
     }
 
-    std::vector<Tree> filterAlreadyShootedCircles(const std::vector<Tree> &detectedCircles) {
-        std::vector<Tree> circlesToShootGPS;
+    std::vector<Tree> filterAlreadyShootedCircles(const std::vector<Tree> &trees) {
+        std::vector<Tree> treesToShoot;
 
         // filter out already shooted circles
-        for (const auto &new_circle: detectedCircles) {
-            bool isSameCircle = false;
+        for (const auto &new_tree: trees) {
+            bool isSameTree = false;
 
-            for (const auto &shooted_circle: circlesAlreadyShooted) {
-                auto distance_m = distanceBetweenGPSPositions_m(new_circle, shooted_circle);
-//                std::cout << distance_m << " m" << std::endl;
+            for (const auto &shooted_circle: treesAlreadyShot) {
+                auto distance_m = distanceBetweenGPSPositions_m(new_tree, shooted_circle);
 
                 if (distance_m <= MaximumDistanceToBeSame_m) {
-                    isSameCircle = true;
+                    isSameTree = true;
                 }
             }
 
-            if (!isSameCircle) {
-                circlesToShootGPS.push_back(new_circle);
+            if (!isSameTree) {
+                treesToShoot.push_back(new_tree);
             }
         }
-        return circlesToShootGPS;
+        return treesToShoot;
     }
 
     std::pair<double, double> squareAreaApprox(double altitude_m) {
@@ -246,12 +278,12 @@ public:
         return {min_area_pxpx, max_area_pxpx};
     }
 
-    std::vector<std::vector<Point>>
+    std::vector<Square>
     findHealthyTrees(const Mat &image, double altitude_m) {
         Mat gray;
 
         std::vector<std::vector<Point>> contours;
-        std::vector<std::vector<Point>> squares;
+        std::vector<Square> squares;
 
         cv::cvtColor(image, gray, COLOR_BGR2GRAY);
         cv::threshold(gray, gray, 180, 255, THRESH_BINARY);
@@ -284,9 +316,16 @@ public:
                 area < area_approx.second &&
                 isContourConvex(approx)) {
 
+                auto roi = boundingRect(approx);
+                cv::Mat mask(roi.size(), CV_8U);
+                drawContours(mask, std::vector{approx}, 0, Scalar::all(255), -1);
+                cv::Scalar roi_mean = cv::mean(image(roi), mask);
+
+                TreeType type = getTreeType(roi_mean);
+
                 if (DRAWING) drawContours(image, std::vector{approx}, 0, Scalar::all(0), 3);
 
-                squares.push_back(approx);
+                squares.push_back({approx, type});
             }
         }
 
@@ -305,9 +344,7 @@ public:
                 return;
             }
 
-            Mat new_frame;
-            cap >> new_frame;
-            resize(new_frame, new_frame, Size(1280, 720));
+            Mat new_frame = getFreshFrame();
 
             if (!new_frame.empty()) {
                 std::lock_guard<Mutex> lock(_camera_output_subscription.mutex);
@@ -339,39 +376,63 @@ public:
                 return;
             }
 
-            Mat new_frame;
-            cap >> new_frame;
-            resize(new_frame, new_frame, Size(1280, 720));
+            Mat new_frame = getFreshFrame();
 
             if (new_frame.empty()) {
                 return;
-            }
-
-            auto squares = findHealthyTrees(new_frame, position.relative_altitude_m);
-            std::vector<Tree> healthy_trees;
-            for (auto sq: squares) {
-                auto M = moments(sq);
-                double cX = M.m10 / M.m00;
-                double cY = M.m01 / M.m00;
-                healthy_trees.push_back(calculateGPSPosition(Point(cX, cY), healthy_tree, position, heading_deg));
             }
 
             auto detectedCircles = getCirclesInImage(new_frame, position.relative_altitude_m);
             auto detectedCircles_GPS = circlesToGPSPositions(detectedCircles, position, heading_deg);
             std::vector<Tree> circlesToShoot_GPS = filterAlreadyShootedCircles(detectedCircles_GPS);
 
-            // add new circles to shoot to array already shot
-            for (const auto &c: circlesToShoot_GPS) {
-                circlesAlreadyShooted.push_back(c);
+            auto squares = findHealthyTrees(new_frame, position.relative_altitude_m);
+            std::vector<Tree> healthy_trees;
+            for (auto sq: squares) {
+                auto M = moments(sq.contour);
+                double cX = M.m10 / M.m00;
+                double cY = M.m01 / M.m00;
+
+                auto treeGPS = calculateGPSPosition(Point(cX, cY), sq.type, position, heading_deg);
+
+                bool isValid = true;
+                for (auto cts: circlesToShoot_GPS) {
+                    if (distanceBetweenGPSPositions_m(cts, treeGPS) < 1) {
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) healthy_trees.push_back(treeGPS);
             }
 
             _camera_output.circlesToShoot = circlesToShoot_GPS;
 
             _camera_output_subscription.callback(_camera_output);
 
-            imshow("camera", new_frame);
-            waitKey(10);
+//            imshow("camera", new_frame);
+//            waitKey(10);
         }
+    }
+
+    CameraThread::Tree calculateMeanPosition(std::vector<CameraThread::Tree> vector) {
+        if (vector.empty()) {
+            return {0, 0};
+        }
+
+        double lat_mean = 0;
+        double lon_mean = 0;
+        for (auto tree: vector) {
+            lat_mean += tree.lat;
+            lon_mean += tree.lon;
+        }
+
+        std::cout << lat_mean << ", " << lon_mean << ", " << std::endl;
+
+        double N = vector.size();
+        lat_mean = lat_mean / N;
+        lon_mean = lon_mean / N;
+
+        return {lat_mean, lon_mean, vector[0].type};
     }
 
     std::vector<Tree> circlesToGPSPositions(const std::vector<Circle> &circles,
@@ -460,6 +521,27 @@ public:
 
         auto lat2 = p2.lat;
         auto lon2 = p2.lon;
+
+        const auto R_m = 6336000; // metres
+        const auto lat1_rad = lat1 * CV_PI / 180;
+        const auto lat2_rad = lat2 * CV_PI / 180;
+        const auto lat_diff = (lat2 - lat1) * CV_PI / 180;
+        const auto lon_diff = (lon2 - lon1) * CV_PI / 180;
+
+        const auto a = sin(lat_diff / 2) * sin(lat_diff / 2) +
+                       cos(lat1_rad) * cos(lat2_rad) *
+                       sin(lon_diff / 2) * sin(lon_diff / 2);
+        const auto c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+        return R_m * c; // in metres
+    }
+
+    double distanceBetween2GPSPoint_m(const Point2d &p1, const Point2d &p2) {
+        auto lat1 = p1.x;
+        auto lon1 = p1.y;
+
+        auto lat2 = p2.x;
+        auto lon2 = p2.y;
 
         const auto R_m = 6336000; // metres
         const auto lat1_rad = lat1 * CV_PI / 180;

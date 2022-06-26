@@ -44,15 +44,20 @@ std::shared_ptr<System> get_system(Mavsdk &mavsdk) {
     return fut.get();
 }
 
-int main() {
-    std::string SIM_URL = "udp://:14540";
-    std::string MISSION_PATH = "../missions/drzewo_zycia_v1.plan";
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        std::cout
+                << "./main [connection string - sim: udp://:14540] [.plan file with mission: ../missions/drzewo_zycia_v1.plan]";
+        return -1;
+    }
 
-    const float SHOOTING_HEIGHT = 10.0;
+    std::string connectionString = argv[1];
+    std::string missionPath = argv[2];
+
     const float SHOOTING_HDG = 0.0;
 
     Mavsdk mavsdk;
-    ConnectionResult connection_result = mavsdk.add_any_connection(SIM_URL);
+    ConnectionResult connection_result = mavsdk.add_any_connection(connectionString);
 
     if (connection_result != ConnectionResult::Success) {
         std::cerr << "Connection failed: " << connection_result << '\n';
@@ -68,7 +73,7 @@ int main() {
     auto telemetry = Telemetry{system};
     auto action = Action{system};
     auto mission_raw = MissionRaw{system};
-    auto camera = CameraThread{&telemetry, "/home/kacper/Pictures/DJI_202206260050_013/DJI_20220626010150_0039.MP4"};
+    auto camera = CameraThread{&telemetry, ""};
 
     // We want to listen to the altitude of the drone at 1 Hz.
     const auto set_rate_result = telemetry.set_rate_position(1.0);
@@ -93,14 +98,18 @@ int main() {
 
             for (const auto &cts: output.circlesToShoot) {
                 sleep_for(seconds(1));
-                std::cout << "shooting circle: " << cts.lat << "," << cts.lon << ", type_mean: " << cts.type
-                          << std::endl;
 
-                auto goto_result = action.goto_location(cts.lat, cts.lon, SHOOTING_HEIGHT, SHOOTING_HDG);
+                printf("circle around [%.8f, %.8f] type:%d\n", cts.lat, cts.lon, cts.type);
+
+                auto absolute_altitude = telemetry.position().absolute_altitude_m;
+
+                auto goto_result = action.goto_location(cts.lat, cts.lon, absolute_altitude, SHOOTING_HDG);
                 if (goto_result != Action::Result::Success) {
                     std::cout << "Goto circle failed: " << goto_result << '\n';
                     continue;
                 }
+
+                sleep_for(seconds(5));
 
                 // GET NEW FRAME TO PRECISE CIRCLE POSITION
                 std::vector<CameraThread::Tree> treePositionGroupToMean;
@@ -115,41 +124,36 @@ int main() {
                     auto newCirclesToShoot = camera.filterAlreadyShootedCircles(detectedCirclesGPS);
 
                     for (auto ncts: newCirclesToShoot) {
-                        treePositionGroupToMean.push_back(ncts);
+                        if (camera.distanceBetweenGPSPositions_m(cts, ncts) < 1) {
+                            treePositionGroupToMean.push_back(ncts);
+                        }
                     }
 
+//                    imshow("camera", next);
                     sleep_for(milliseconds(100));
                 }
 
-                double lat_mean = 0;
-                double lon_mean = 0;
-                double type_mean = 0;
-                for (auto tree: treePositionGroupToMean) {
-                    lat_mean += tree.lat;
-                    lon_mean += tree.lon;
-                    type_mean += int(tree.type);
+                CameraThread::Tree meanPosition = camera.calculateMeanPosition(treePositionGroupToMean);
+                if (!treePositionGroupToMean.empty()) {
+                    printf("circle mean position [%.8f, %.8f] type:%d\n", meanPosition.lat, meanPosition.lon,
+                           meanPosition.type);
+
+                    auto goto_2_result = action.goto_location(meanPosition.lat, meanPosition.lon, absolute_altitude,
+                                                              SHOOTING_HDG);
+                    if (goto_2_result != Action::Result::Success) {
+                        std::cout << "Goto circle failed: " << goto_2_result << '\n';
+                        continue;
+                    }
+
+                    sleep_for(seconds(3));
+
+                    // SHOOT
+                    std::cout << "SHOOT DAMN" << std::endl;
+
+                    sleep_for(seconds(1));
+
+                    camera.treesAlreadyShot.push_back(meanPosition);
                 }
-
-                double N = treePositionGroupToMean.size();
-                lat_mean = lat_mean / N;
-                lon_mean = lon_mean / N;
-                type_mean = type_mean / N;
-
-                CameraThread::Tree meanPosition{
-                        lat_mean, lon_mean, CameraThread::TreeType(int(type_mean))
-                };
-
-                auto goto_2_result = action.goto_location(meanPosition.lat, meanPosition.lon, SHOOTING_HEIGHT,
-                                                          SHOOTING_HDG);
-                if (goto_2_result != Action::Result::Success) {
-                    std::cout << "Goto circle failed: " << goto_2_result << '\n';
-                    continue;
-                }
-
-                // SHOOT
-                std::cout << "SHOOT DAMN" << std::endl;
-
-                sleep_for(seconds(5));
 
                 mission_raw.start_mission();
                 std::cout << "Mission resumed.\n";
@@ -160,41 +164,27 @@ int main() {
     std::cout << "Camera ready.\n";
 
 // Check until vehicle is ready to arm
-    while (!telemetry.
-
-            health_all_ok()
-
-            ) {
+    while (!telemetry.health_all_ok()) {
         std::cout << "Vehicle is getting ready to arm\n";
-        sleep_for(seconds(1)
-        );
+        sleep_for(seconds(1));
     }
 
     std::cout << "System ready\n";
     std::cout << "Creating and uploading mission\n";
 
-    std::cout << "Importing mission from mission plan: " << MISSION_PATH << '\n';
+    std::cout << "Importing mission from mission plan: " << missionPath << '\n';
     std::pair<MissionRaw::Result, MissionRaw::MissionImportData> import_res = mission_raw.import_qgroundcontrol_mission(
-            MISSION_PATH);
+            missionPath);
     if (import_res.first != MissionRaw::Result::Success) {
-        std::cerr << "Failed to import mission items: " << import_res.
-                first;
+        std::cerr << "Failed to import mission items: " << import_res.first;
         return 1;
     }
 
-    if (import_res.second.mission_items.
-
-            empty()
-
-            ) {
+    if (import_res.second.mission_items.empty()) {
         std::cerr << "No missions! Exiting...\n";
         return 1;
     }
-    std::cout << "Found " << import_res.second.mission_items.
-
-            size()
-
-              << " mission items in the given QGC plan.\n";
+    std::cout << "Found " << import_res.second.mission_items.size() << " mission items in the given QGC plan.\n";
 
     std::cout << "Uploading mission...";
     const MissionRaw::Result upload_result = mission_raw.upload_mission(import_res.second.mission_items);
@@ -219,8 +209,7 @@ int main() {
     mission_raw.subscribe_mission_progress([&missionProgressPromise](
             MissionRaw::MissionProgress mission_progress
     ) {
-        std::cout << "Mission progress update: " << mission_progress.current << " / "
-                  << mission_progress.total << '\n';
+        std::cout << "Mission progress update: " << mission_progress.current << " / " << mission_progress.total << '\n';
         if (mission_progress.current == mission_progress.total) {
             missionProgressPromise.set_value(true);
         }
@@ -233,16 +222,7 @@ int main() {
     }
 
 // wait for last mission point to be completed
-    while (missionProgressFuture.
-
-            valid() &&
-
-           !missionProgressFuture.
-
-                   get()
-
-            ) {
-    }
+    while (missionProgressFuture.valid() && !missionProgressFuture.get()) {}
 
 // Mission complete. Command RTL to go home.
     std::cout << "Commanding RTL...\n";
@@ -256,33 +236,22 @@ int main() {
     auto landingActionPromise = std::promise<void>{};
     auto landingActionFuture = landingActionPromise.get_future();
 
-    telemetry.subscribe_landed_state([&landingActionPromise](
-            Telemetry::LandedState result
-    ) {
+    telemetry.subscribe_landed_state([&landingActionPromise](Telemetry::LandedState result) {
         if (result == Telemetry::LandedState::OnGround) {
-            landingActionPromise.
-
-                    set_value();
-
+            landingActionPromise.set_value();
         }
     });
 
 // wait for landing complete
-    landingActionFuture.
-
-            get();
+    landingActionFuture.get();
 
     telemetry.subscribe_landed_state(nullptr);
 
     std::cout << "Landed. Thanks for flying with WUThrust.\n";
 
-    camera.
+    camera.stop();
 
-            stop();
-
-    camera_thread.
-
-            join();
+    camera_thread.join();
 
     return 0;
 }

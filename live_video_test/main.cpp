@@ -18,9 +18,6 @@ int main() {
         std::cout << "errrr" << std::endl;
     }
 
-    cv::namedWindow("original", 0);
-    cv::namedWindow("video", 0);
-
     double altitude_m = 10;
 
     while (true) {
@@ -56,6 +53,8 @@ int main() {
         undistort(frame, imageUndistorted, cam_intrinsic, distCoeffs);
         auto circles = camera.getCirclesInImage(frame, altitude_m);
 
+        frame = imageUndistorted;
+
         for (auto c: circles) {
             if (c.type != CameraThread::probably_grass) {
                 cv::circle(frame, Point(int(c.x), int(c.y)), int(c.radius), camera.getColorFromType(c.type), 5);
@@ -69,13 +68,9 @@ int main() {
         auto squares = camera.findHealthyTrees(frame, altitude_m);
         drawContours(frame, squares, -1, Scalar::all(255));
 
-        cv::imshow("original", frame);
         cv::imshow("video", imageUndistorted);
 
         switch (cv::waitKey(1)) {
-            case 's':
-                cv::imwrite("../../algorithm_wip/test.jpg", frame);
-                break;
             case 'q':
                 goto exit;
             default:
