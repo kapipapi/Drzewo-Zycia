@@ -123,7 +123,7 @@ public:
 
     using CameraOutputCallback = std::function<void(CameraOutput)>;
 
-    Size imageSize = Size(848, 480);
+    Size imageSize = Size(1280, 720);
     int imageWidth = imageSize.width;
     int imageHeight = imageSize.height;
 

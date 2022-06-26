@@ -11,27 +11,26 @@
 
 #include "../cameraThread.cpp"
 
+CameraThread::Tree getGPS(CameraThread camera, Point circenter, Telemetry::Position droneposition, double heading) {
+    return camera.calculateGPSPosition(circenter, CameraThread::pathogen_beige_tree,
+                                       droneposition, heading);
+}
+
 
 int main() {
-    Mat frame = imread("/home/kacper/Pictures/DJI_202206260050_013/DJI_20220626005511_0006.JPG");
 
     CameraThread camera{};
-
     camera.pixel_calculation_error_rate = 0.3;
-
     camera.focal_length_px = 16867.768;
+    camera.imageWidth = 8192;
+    camera.imageHeight = 5460;
 
-    double altitude_m = 32.068;
+    auto tree1 = getGPS(camera, Point(3683, 2257), {50.238846704, 19.027875130, 0, 32.068}, 0);
+    auto tree2 = getGPS(camera, Point(647, 3566), {50.238953731, 19.027997820, 0, 31.971}, 0);
 
-    auto trees = camera.findHealthyTrees(frame, altitude_m);
-    drawContours(frame, trees, -1, Scalar(0, 0, 0), 10);
-    std::cout << trees.size() << std::endl;
-
-    resize(frame, frame, Size(8192 / 4, 5460 / 4));
-    cv::namedWindow("frame", CV_WINDOW_FULLSCREEN);
-    imshow("frame", frame);
-
-    waitKey();
+    std::cout.precision(15);
+    std::cout << tree1.lat << ", " << tree1.lon << std::endl;
+    std::cout << tree2.lat << ", " << tree2.lon << std::endl;
 
     return 0;
 }

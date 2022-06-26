@@ -11,6 +11,12 @@ add_executable(live_video_test main.cpp ../cameraThread.cpp)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+find_package(MAVSDK REQUIRED)
+target_link_libraries(live_video_test
+        MAVSDK::mavsdk
+        )
+
+
 add_compile_options(live_video_test PRIVATE -Wall -Wextra)
 
 target_link_libraries(live_video_test ${OpenCV_LIBS})

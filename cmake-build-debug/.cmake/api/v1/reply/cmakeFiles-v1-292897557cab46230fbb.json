@@ -283,6 +283,27 @@
 		{
 			"isExternal" : true,
 			"path" : "/usr/share/OpenCV/OpenCVModules-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/MAVSDK/MAVSDKConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/MAVSDK/MAVSDKConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/snap/clion/198/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/MAVSDK/MAVSDKTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/MAVSDK/MAVSDKTargets-release.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
