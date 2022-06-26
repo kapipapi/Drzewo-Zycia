@@ -1,0 +1,2 @@
+add_subdirectory(camera_thread)
+add_subdirectory(gsteam_test)

@@ -8,31 +8,32 @@ project(drzewo_zycia)
 
 include(cmake/build_external_project.cmake)
 
-build_external_project(
-        mavsdk
-        https://github.com/mavlink/MAVSDK.git
-        tags/v1.4.2
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/mavsdk
-)
+#build_external_project(
+#        mavsdk
+#        https://github.com/mavlink/MAVSDK.git
+#        tags/v1.4.2
+#        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/mavsdk
+#)
 set(MAVSDK_DIR ${CMAKE_CURRENT_BINARY_DIR}/mavsdk/lib/cmake/MAVSDK)
 
 find_package(MAVSDK REQUIRED)
 
-add_subdirectory(camera_calibration)
-add_subdirectory(algorithm_wip)
-add_subdirectory(photo_test)
-add_subdirectory(live_video_test)
-add_subdirectory(gsteam_test)
-
-add_executable(drzewo_zycia main.cpp cameraThread.cpp)
-
-target_link_libraries(drzewo_zycia
-        MAVSDK::mavsdk
-        )
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_compile_options(drzewo_zycia PRIVATE -Wall -Wextra)
+#add_compile_options(drzewo_zycia PRIVATE -Wall -Wextra)
 
-target_link_libraries(drzewo_zycia ${OpenCV_LIBS})
+add_subdirectory(src)
+add_subdirectory(camera_calibration)
+add_subdirectory(algorithm_wip)
+add_subdirectory(photo_test)
+add_subdirectory(live_video_test)
+
+add_executable(drzewo_zycia main.cpp cameraThread.cpp)
+
+target_link_libraries(
+	drzewo_zycia
+        MAVSDK::mavsdk
+	${OpenCV_LIBS}
+)
