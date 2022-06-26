@@ -86,6 +86,10 @@ public:
         UMat newframe;
         cap >> newframe;
 
+        if(newframe.empty()){
+            return {};
+        }
+
         UMat imageUndistorted;
         undistort(newframe, imageUndistorted, cam_intrinsic, distCoeffs);
 
@@ -118,6 +122,7 @@ public:
     };
 
     std::vector<Tree> treesAlreadyShot;
+    std::vector<Tree> healthyTrees;
 
     CameraOutput _camera_output = {};
 
@@ -223,7 +228,7 @@ public:
             auto colRangeEnd = std::min(int(circle[0] + circle[2] + 1), image.cols);
 
             cv::UMat roi = image(cv::Range(rowRangeStart, rowRangeEnd),
-                                cv::Range(colRangeStart, colRangeEnd));
+                                 cv::Range(colRangeStart, colRangeEnd));
 
             cv::UMat mask(roi.size(), CV_8U);
             cv::circle(mask, Point(roi.rows / 2, roi.cols / 2), int(circle[2]), cv::Scalar::all(255), -1);
@@ -257,6 +262,18 @@ public:
 
                 if (distance_m <= MaximumDistanceToBeSame_m) {
                     isSameTree = true;
+                    break;
+                }
+            }
+
+            if(!isSameTree) {
+                for (const auto &ht: healthyTrees) {
+                    auto distance_m = distanceBetweenGPSPositions_m(new_tree, ht);
+
+                    if (distance_m <= MaximumDistanceToBeSame_m) {
+                        isSameTree = true;
+                        break;
+                    }
                 }
             }
 
@@ -399,6 +416,16 @@ public:
                 for (auto cts: circlesToShoot_GPS) {
                     if (distanceBetweenGPSPositions_m(cts, treeGPS) < 1) {
                         isValid = false;
+                        break;
+                    }
+                }
+
+                if (isValid) {
+                    for (auto ht: this->healthyTrees) {
+                        if (distanceBetweenGPSPositions_m(ht, treeGPS) < 1) {
+                            isValid = false;
+                            break;
+                        }
                     }
                 }
 
@@ -406,6 +433,10 @@ public:
             }
 
             _camera_output.circlesToShoot = circlesToShoot_GPS;
+
+            for (auto ht: healthy_trees) {
+                this->healthyTrees.push_back(ht);
+            }
 
             _camera_output_subscription.callback(_camera_output);
         }
@@ -422,8 +453,6 @@ public:
             lat_mean += tree.lat;
             lon_mean += tree.lon;
         }
-
-        std::cout << lat_mean << ", " << lon_mean << ", " << std::endl;
 
         double N = vector.size();
         lat_mean = lat_mean / N;

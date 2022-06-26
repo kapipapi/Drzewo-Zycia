@@ -7,6 +7,8 @@
 // Defining the dimensions of checkerboard
 int CHECKERBOARD[2]{6, 9};
 
+using namespace cv;
+
 int main() {
     // Creating vector to store vectors of 3D points for each checkerboard image
     std::vector<std::vector<cv::Point3f> > objpoints;

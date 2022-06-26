@@ -86,6 +86,8 @@ public:
         UMat newframe;
         cap >> newframe;
 
+        if (newframe.empty()) return {};
+
         UMat imageUndistorted;
         undistort(newframe, imageUndistorted, cam_intrinsic, distCoeffs);
 
@@ -223,7 +225,7 @@ public:
             auto colRangeEnd = std::min(int(circle[0] + circle[2] + 1), image.cols);
 
             cv::UMat roi = image(cv::Range(rowRangeStart, rowRangeEnd),
-                                cv::Range(colRangeStart, colRangeEnd));
+                                 cv::Range(colRangeStart, colRangeEnd));
 
             cv::UMat mask(roi.size(), CV_8U);
             cv::circle(mask, Point(roi.rows / 2, roi.cols / 2), int(circle[2]), cv::Scalar::all(255), -1);
@@ -341,6 +343,7 @@ public:
 
         while (true) {
             if (!cap.isOpened()) {
+                std::cout << "isnotopen" << std::endl;
                 return;
             }
 

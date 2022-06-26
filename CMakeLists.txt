@@ -18,7 +18,6 @@ set(MAVSDK_DIR ${CMAKE_CURRENT_BINARY_DIR}/mavsdk/lib/cmake/MAVSDK)
 
 find_package(MAVSDK REQUIRED)
 
-
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 

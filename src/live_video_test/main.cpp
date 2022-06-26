@@ -1,7 +1,6 @@
 //
 // Created by kacper on 25.06.22.
 //
-#include <iostream>
 #include <fstream>
 
 #include <opencv2/opencv.hpp>
@@ -81,9 +80,12 @@ int main(int argc, char *argv[]) {
     std::vector<CameraThread::Tree> alreadyDetected;
 
     std::ofstream file("output.csv");
+    file << "lat" << ", " << "lon" << ", " << "type" << std::endl;
+
+    camera.setCameraMatrix();
 
     while (true) {
-        cv::UMat frame;// = camera.getFreshFrame();
+        cv::UMat frame; // = camera.getFreshFrame();
         camera.cap >> frame;
         auto position = telemetry.position();
         auto heading_deg = telemetry.heading().heading_deg;
@@ -107,6 +109,10 @@ int main(int argc, char *argv[]) {
                 }
                 if (!isAlreadyDetectedTree) {
                     alreadyDetected.push_back(tts);
+
+                    std::cout << camera.getStringFromType(tts.type) << " [" << tts.lat << ", " << tts.lon << "]"
+                              << std::endl;
+                    file << tts.lat << ", " << tts.lon << ", " << camera.getStringFromType(tts.type) << std::endl;
                 }
             }
         }
@@ -131,15 +137,12 @@ int main(int argc, char *argv[]) {
             if (!isAlreadyDetectedTree) {
                 alreadyDetected.push_back(treeGPS);
 
+                std::cout << camera.getStringFromType(treeGPS.type) << " [" << treeGPS.lat << ", " << treeGPS.lon << "]"
+                          << std::endl;
+                file << treeGPS.lat << ", " << treeGPS.lon << ", " << camera.getStringFromType(treeGPS.type)
+                     << std::endl;
             }
         }
-
-        for (auto c: alreadyDetected) {
-            std::cout << camera.getStringFromType(c.type) << " [" << c.lat << ", " << c.lon << "]" << std::endl;
-            file << c.lat << ", " << c.lon << ", " << camera.getStringFromType(c.type) << std::endl;
-        }
-
-        file << "dupa" << std::endl;
 
         sleep_for(milliseconds(30));
     }

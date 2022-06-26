@@ -1,6 +1,7 @@
 #include <iostream>
 #include <future>
 #include <thread>
+#include <fstream>
 
 #include <mavsdk/mavsdk.h>
 #include <mavsdk/plugins/action/action.h>
@@ -47,9 +48,11 @@ std::shared_ptr<System> get_system(Mavsdk &mavsdk) {
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout
-                << "./main [connection string - sim: udp://:14540] [.plan file with mission: ../missions/drzewo_zycia_v1.plan]";
+                << "./main [connection string] [.plan file with mission]";
         return -1;
     }
+
+    std::ofstream file("output.csv");
 
     std::string connectionString = argv[1];
     std::string missionPath = argv[2];
@@ -89,7 +92,6 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Video capture initialization.\n";
 
-    namedWindow("camera", WINDOW_NORMAL);
     std::thread camera_thread(CameraThread::RunThread, &camera);
     camera.subscribe_camera_output([&](const CameraThread::CameraOutput &output) {
         if (!output.circlesToShoot.empty()) {
@@ -124,20 +126,19 @@ int main(int argc, char *argv[]) {
                     auto newCirclesToShoot = camera.filterAlreadyShootedCircles(detectedCirclesGPS);
 
                     for (auto ncts: newCirclesToShoot) {
-                        if (camera.distanceBetweenGPSPositions_m(cts, ncts) < 1) {
-                            treePositionGroupToMean.push_back(ncts);
-                        }
+                        auto distance = camera.distanceBetweenGPSPositions_m(cts, ncts);
+                        printf("new circle to shoot distance %f\n", distance);
+                        treePositionGroupToMean.push_back(ncts);
                     }
 
 //                    imshow("camera", next);
-                    sleep_for(milliseconds(100));
+                    sleep_for(milliseconds(10));
                 }
 
                 CameraThread::Tree meanPosition = camera.calculateMeanPosition(treePositionGroupToMean);
+                printf("circle mean position [%.8f, %.8f] type:%d\n", meanPosition.lat, meanPosition.lon,
+                       meanPosition.type);
                 if (!treePositionGroupToMean.empty()) {
-                    printf("circle mean position [%.8f, %.8f] type:%d\n", meanPosition.lat, meanPosition.lon,
-                           meanPosition.type);
-
                     auto goto_2_result = action.goto_location(meanPosition.lat, meanPosition.lon, absolute_altitude,
                                                               SHOOTING_HDG);
                     if (goto_2_result != Action::Result::Success) {
@@ -145,7 +146,7 @@ int main(int argc, char *argv[]) {
                         continue;
                     }
 
-                    sleep_for(seconds(3));
+                    sleep_for(seconds(5));
 
                     // SHOOT
                     std::cout << "SHOOT DAMN" << std::endl;
@@ -153,6 +154,8 @@ int main(int argc, char *argv[]) {
                     sleep_for(seconds(1));
 
                     camera.treesAlreadyShot.push_back(meanPosition);
+                    file << meanPosition.lat << ", " << meanPosition.lon << ", "
+                         << camera.getStringFromType(meanPosition.type) << std::endl;
                 }
 
                 mission_raw.start_mission();
