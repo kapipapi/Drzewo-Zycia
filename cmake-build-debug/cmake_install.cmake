@@ -48,6 +48,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/algorithm_wip/cmake_install.cmake")
   include("/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/photo_test/cmake_install.cmake")
   include("/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test/cmake_install.cmake")
+  include("/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/gsteam_test/cmake_install.cmake")
 
 endif()
 

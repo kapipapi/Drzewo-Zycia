@@ -82,11 +82,11 @@ public:
             std::pair{pathogen_beige, pathogen_beige_tree}
     };
 
-    Mat getFreshFrame() {
-        Mat newframe;
+    UMat getFreshFrame() {
+        UMat newframe;
         cap >> newframe;
 
-        Mat imageUndistorted;
+        UMat imageUndistorted;
         undistort(newframe, imageUndistorted, cam_intrinsic, distCoeffs);
 
         return imageUndistorted;
@@ -113,7 +113,7 @@ public:
     VideoCapture cap;
 
     struct CameraOutput {
-        Mat frame;
+        UMat frame;
         std::vector<Tree> circlesToShoot;
     };
 
@@ -201,9 +201,9 @@ public:
     }
 
     std::vector<Circle> getCirclesInImage(
-            Mat image,
+            UMat image,
             double altitude_m) {
-        Mat gray;
+        UMat gray;
         cvtColor(image, gray, COLOR_BGR2GRAY);
         medianBlur(gray, gray, 5);
 
@@ -222,10 +222,10 @@ public:
             auto colRangeStart = std::max(int(circle[0] - circle[2]), 0);
             auto colRangeEnd = std::min(int(circle[0] + circle[2] + 1), image.cols);
 
-            cv::Mat roi = image(cv::Range(rowRangeStart, rowRangeEnd),
+            cv::UMat roi = image(cv::Range(rowRangeStart, rowRangeEnd),
                                 cv::Range(colRangeStart, colRangeEnd));
 
-            cv::Mat mask(roi.size(), CV_8U);
+            cv::UMat mask(roi.size(), CV_8U);
             cv::circle(mask, Point(roi.rows / 2, roi.cols / 2), int(circle[2]), cv::Scalar::all(255), -1);
             cv::Scalar roi_mean = cv::mean(roi, mask);
 
@@ -279,8 +279,8 @@ public:
     }
 
     std::vector<Square>
-    findHealthyTrees(const Mat &image, double altitude_m) {
-        Mat gray;
+    findHealthyTrees(const UMat &image, double altitude_m) {
+        UMat gray;
 
         std::vector<std::vector<Point>> contours;
         std::vector<Square> squares;
@@ -293,7 +293,7 @@ public:
                                             Point(1, 1));
         cv::erode(gray, gray, element, Point(-1, -1), 10);
 
-        morphologyEx(gray, gray, MORPH_CLOSE, Mat(), Point(-1, -1), 100);
+        morphologyEx(gray, gray, MORPH_CLOSE, UMat(), Point(-1, -1), 100);
         Canny(gray, gray, 0, 100, 5);
 
         Mat element2 = getStructuringElement(MORPH_DILATE,
@@ -317,7 +317,7 @@ public:
                 isContourConvex(approx)) {
 
                 auto roi = boundingRect(approx);
-                cv::Mat mask(roi.size(), CV_8U);
+                cv::UMat mask(roi.size(), CV_8U);
                 drawContours(mask, std::vector{approx}, 0, Scalar::all(255), -1);
                 cv::Scalar roi_mean = cv::mean(image(roi), mask);
 
@@ -344,7 +344,7 @@ public:
                 return;
             }
 
-            Mat new_frame = getFreshFrame();
+            UMat new_frame = getFreshFrame();
 
             if (!new_frame.empty()) {
                 std::lock_guard<Mutex> lock(_camera_output_subscription.mutex);
@@ -376,7 +376,7 @@ public:
                 return;
             }
 
-            Mat new_frame = getFreshFrame();
+            UMat new_frame = getFreshFrame();
 
             if (new_frame.empty()) {
                 return;
@@ -408,9 +408,6 @@ public:
             _camera_output.circlesToShoot = circlesToShoot_GPS;
 
             _camera_output_subscription.callback(_camera_output);
-
-//            imshow("camera", new_frame);
-//            waitKey(10);
         }
     }
 

@@ -10,6 +10,7 @@ add_subdirectory(camera_calibration)
 add_subdirectory(algorithm_wip)
 add_subdirectory(photo_test)
 add_subdirectory(live_video_test)
+add_subdirectory(gsteam_test)
 
 add_executable(drzewo_zycia main.cpp cameraThread.cpp)
 

@@ -68,15 +68,17 @@ int main(int argc, char *argv[]) {
     // Instantiate plugins.
     auto telemetry = Telemetry{system};
     CameraThread camera{&telemetry, ""};
+    camera.DRAWING = false;
 
     camera.cap.open(0);
     if (!camera.cap.isOpened()) {
-        std::cout << "errrr" << std::endl;
+        std::cout << "Camera capture is not open!" << std::endl;
+        return 1;
     }
 
     int i = 0;
     while (true) {
-        cv::Mat frame = camera.getFreshFrame();
+        cv::UMat frame = camera.getFreshFrame();
         auto position = telemetry.position();
         auto heading_deg = telemetry.heading().heading_deg;
 

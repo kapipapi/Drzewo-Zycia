@@ -23,7 +23,7 @@ int main() {
     std::cout << r.first << " - " << r.second << std::endl;
 
     while (true) {
-        cv::Mat frame;
+        cv::UMat frame;
 
         camera.cap >> frame;
 

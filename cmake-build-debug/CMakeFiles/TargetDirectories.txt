@@ -13,3 +13,6 @@
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test/CMakeFiles/live_video_test.dir
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test/CMakeFiles/edit_cache.dir
 /home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/live_video_test/CMakeFiles/rebuild_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/gsteam_test/CMakeFiles/gsteam_test.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/gsteam_test/CMakeFiles/edit_cache.dir
+/home/kacper/CLionProjects/drzewo_zycia/cmake-build-debug/gsteam_test/CMakeFiles/rebuild_cache.dir

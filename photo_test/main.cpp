@@ -18,7 +18,6 @@ CameraThread::Tree getGPS(CameraThread camera, Point circenter, Telemetry::Posit
 
 
 int main() {
-
     CameraThread camera{};
     camera.pixel_calculation_error_rate = 0.3;
     camera.focal_length_px = 16867.768;
