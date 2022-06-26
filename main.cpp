@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
                 // GET NEW FRAME TO PRECISE CIRCLE POSITION
                 std::vector<CameraThread::Tree> treePositionGroupToMean;
                 for (int i = 0; i < 10; i++) {
-                    Mat next = camera.getFreshFrame();
+                    UMat next = camera.getFreshFrame();
 
                     auto position = telemetry.position();
                     auto heading = telemetry.heading().heading_deg;

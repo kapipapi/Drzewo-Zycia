@@ -1,11 +1,13 @@
 //
 // Created by kacper on 25.06.22.
 //
+#include <iostream>
+#include <fstream>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
 
-#include "../cameraThread.cpp"
+#include "../../cameraThread.cpp"
 
 using namespace mavsdk;
 
@@ -76,9 +78,13 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int i = 0;
+    std::vector<CameraThread::Tree> alreadyDetected;
+
+    std::ofstream file("output.csv");
+
     while (true) {
-        cv::UMat frame = camera.getFreshFrame();
+        cv::UMat frame;// = camera.getFreshFrame();
+        camera.cap >> frame;
         auto position = telemetry.position();
         auto heading_deg = telemetry.heading().heading_deg;
 
@@ -89,14 +95,19 @@ int main(int argc, char *argv[]) {
 //        CIRCLES
         auto detectedCircles = camera.getCirclesInImage(frame, position.relative_altitude_m);
         auto detectedCircles_GPS = camera.circlesToGPSPositions(detectedCircles, position, heading_deg);
-        std::vector<CameraThread::Tree> circlesToShoot_GPS = camera.filterAlreadyShootedCircles(detectedCircles_GPS);
-        for (auto c: detectedCircles) {
-            if (c.type != CameraThread::probably_grass) {
-                cv::circle(frame, Point(int(c.x), int(c.y)), int(c.radius), camera.getColorFromType(c.type), 5);
-                cv::putText(frame, std::to_string(int(c.radius)), Point(int(c.x), int(c.y)), 1, 1, Scalar::all(0), 2);
-                cv::putText(frame, camera.getStringFromType(c.type), Point(int(c.x), int(c.y + 10)), 1, 1,
-                            Scalar::all(0),
-                            2);
+        std::vector<CameraThread::Tree> treesToShoot = camera.filterAlreadyShootedCircles(detectedCircles_GPS);
+        for (auto tts: treesToShoot) {
+            if (tts.type != CameraThread::probably_grass) {
+                bool isAlreadyDetectedTree = false;
+                for (auto adt: alreadyDetected) {
+                    if (camera.distanceBetweenGPSPositions_m(tts, adt) < 1) {
+                        isAlreadyDetectedTree = true;
+                        break;
+                    }
+                }
+                if (!isAlreadyDetectedTree) {
+                    alreadyDetected.push_back(tts);
+                }
             }
         }
 
@@ -110,39 +121,28 @@ int main(int argc, char *argv[]) {
 
             auto treeGPS = camera.calculateGPSPosition(Point(cX, cY), sq.type, position, heading_deg);
 
-            bool isValid = true;
-            for (auto cts: circlesToShoot_GPS) {
-                if (camera.distanceBetweenGPSPositions_m(cts, treeGPS) < 1) {
-                    isValid = false;
+            bool isAlreadyDetectedTree = false;
+            for (auto adt: alreadyDetected) {
+                if (camera.distanceBetweenGPSPositions_m(adt, treeGPS) < 1) {
+                    isAlreadyDetectedTree = true;
                 }
             }
 
-            if (isValid) healthy_trees.push_back(treeGPS);
+            if (!isAlreadyDetectedTree) {
+                alreadyDetected.push_back(treeGPS);
+
+            }
         }
 
-        drawContours(frame, squares, -1, Scalar::all(255));
-
-        std::cout << "PHOTO " << i << std::endl;
-        for (auto c: circlesToShoot_GPS) {
+        for (auto c: alreadyDetected) {
             std::cout << camera.getStringFromType(c.type) << " [" << c.lat << ", " << c.lon << "]" << std::endl;
-        }
-        for (auto c: healthy_trees) {
-            std::cout << camera.getStringFromType(CameraThread::TreeType::healthy_tree) << " [" << c.lat << ", "
-                      << c.lon << "]" << std::endl;
+            file << c.lat << ", " << c.lon << ", " << camera.getStringFromType(c.type) << std::endl;
         }
 
-        cv::imwrite("../test/photo_" + std::to_string(i) + ".jpg", frame);
+        file << "dupa" << std::endl;
 
-        cv::imshow("video", frame);
-
-        switch (cv::waitKey(1)) {
-            case 'q':
-                goto exit;
-            default:
-                continue;
-        }
+        sleep_for(milliseconds(30));
     }
-    exit:
 
     return 0;
 }

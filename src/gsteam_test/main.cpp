@@ -10,7 +10,7 @@
 int main() {
 
     //std::string stream_string = "appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx ! nvvidconv ! omxh264enc preset-level=1 bitrate=5000  ! video/x-h264, stream-format=byte-stream ! h264parse ! rtph264pay pt=96 config-interval=1 ! udpsink host=localhost port=5602";
-    //std::string stream_string = "appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx ! nvvidconv ! nvv4l2h264enc maxperf-enable=1 insert-sps-pps=1 ! h264parse ! rtph264pay ! udpsink host=localhost port=5602";
+    std::string stream_string = "appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx ! nvvidconv ! nvv4l2h264enc maxperf-enable=1 insert-sps-pps=1 ! h264parse ! rtph264pay ! udpsink host=localhost port=5602";
     //std::string stream_string = "appsrc ! video/x-raw, format=BGR ! queue ! videoconvert ! video/x-raw, format=BGRx !videoconvert ! x264enc speed-preset=ultrafast tune=zerolatency bitrate=10000 key-int-max=10 ! queue ! rtph264pay ! udpsink host=127.0.0.1 port=5602";
     cv::VideoWriter stream(stream_string, 0, 30, cv::Size(1280, 720));
 

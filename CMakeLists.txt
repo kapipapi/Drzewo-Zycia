@@ -22,18 +22,12 @@ find_package(MAVSDK REQUIRED)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-#add_compile_options(drzewo_zycia PRIVATE -Wall -Wextra)
-
 add_subdirectory(src)
-add_subdirectory(camera_calibration)
-add_subdirectory(algorithm_wip)
-add_subdirectory(photo_test)
-add_subdirectory(live_video_test)
 
 add_executable(drzewo_zycia main.cpp cameraThread.cpp)
 
 target_link_libraries(
-	drzewo_zycia
+        drzewo_zycia
         MAVSDK::mavsdk
-	${OpenCV_LIBS}
+        ${OpenCV_LIBS}
 )

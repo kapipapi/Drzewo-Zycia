@@ -9,7 +9,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
 
-#include "../cameraThread.cpp"
+#include "../../cameraThread.cpp"
 
 CameraThread::Tree getGPS(CameraThread camera, Point circenter, Telemetry::Position droneposition, double heading) {
     return camera.calculateGPSPosition(circenter, CameraThread::pathogen_beige_tree,
